@@ -1,0 +1,55 @@
+package simulator.view;
+
+import java.util.List;
+
+import simulator.control.Controler;
+import simulator.model.AnimalInfo;
+import simulator.model.EcoSysObserver;
+import simulator.model.MapInfo;
+import simulator.model.RegionInfo;
+
+public class Car implements EcoSysObserver{
+	private Controler _ctrl;
+	
+	public Car(Controler ctrl) {
+		
+		
+		
+		
+		_ctrl=ctrl;
+		ctrl.addObserver(this);
+	}
+
+	@Override
+	public void onRegister(double time, MapInfo map, List<AnimalInfo> animals) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReset(double time, MapInfo map, List<AnimalInfo> animals) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onAnimalAdded(double time, MapInfo map, List<AnimalInfo> animals, AnimalInfo a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRegionSet(int row, int col, MapInfo map, RegionInfo r) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onAvanced(double time, MapInfo map, List<AnimalInfo> animals, double dt) {
+		// TODO Auto-generated method stub
+		
+	}
+public void Imprimir() {
+	System.out.println("Car solucion");
+}
+}

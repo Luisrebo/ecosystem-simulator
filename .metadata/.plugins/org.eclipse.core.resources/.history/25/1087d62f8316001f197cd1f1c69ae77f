@@ -1,0 +1,26 @@
+package simulator.factories;
+
+import org.json.JSONObject;
+import simulator.model.DNuevaRegion;
+import simulator.model.Region;
+
+public class DNuevaRegion extends Builder<Region> {
+
+	public DNuevaRegion() {
+		super("nueva", "nueva region practica");
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
+	@Override
+	protected DNuevaRegion create_instance(JSONObject data) {
+		
+		return new DNuevaRegion();
+	}
+	
+	protected void fill_in_data(JSONObject o) {
+		
+	}
+
+}

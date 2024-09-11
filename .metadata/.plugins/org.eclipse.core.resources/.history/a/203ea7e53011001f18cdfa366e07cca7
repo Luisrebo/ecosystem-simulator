@@ -1,0 +1,127 @@
+package simulator.view;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.table.AbstractTableModel;
+
+import simulator.control.Controler;
+import simulator.model.Animal;
+import simulator.model.Animal.Diet;
+import simulator.model.AnimalInfo;
+import simulator.model.EcoSysObserver;
+import simulator.model.MapInfo;
+import simulator.model.RegionInfo;
+
+public class ExamenTableModel extends AbstractTableModel implements EcoSysObserver {
+	
+	private static class IteracionClass {
+		private Long _carnivoros;
+		private Long _herviboros;
+
+		IteracionClass(Long carnivoros,Long herviboros) {
+			_carnivoros = carnivoros;
+			_herviboros = herviboros;
+		
+		}
+	}
+	
+	private List <AnimalInfo>_listaCarnivoros;
+	private List <AnimalInfo>_listaHerviboros;
+	private List <IteracionClass> _listaIteraciones;
+	private Controler _ctrl;
+	private String[] _headers= {"Step","Herviboros Danger","Carnivoros Hunger"};
+	
+	public ExamenTableModel(Controler ctrl) {
+		
+		_listaCarnivoros=new ArrayList<>();
+		_listaHerviboros=new ArrayList<>();
+		_listaIteraciones=new ArrayList<>();
+		
+		
+		_ctrl=ctrl;
+		_ctrl.addObserver(this);
+		
+	}
+
+	@Override
+	public int getRowCount() {
+		// TODO Auto-generated method stub
+		return _headers.length;
+	}
+
+	@Override
+	public String getColumnName(int column) {
+		return _headers[column];
+	}
+	
+	@Override
+	public int getColumnCount() {
+		// TODO Auto-generated method stub
+		return _listaIteraciones.size();
+	}
+
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		// TODO Auto-generated method stub
+		switch (columnIndex) {
+		
+		case 0: 
+			return rowIndex;
+		
+		case 1:
+		return _listaIteraciones.get(rowIndex)._herviboros;
+		
+		case 2: 
+			return _listaIteraciones.get(rowIndex)._carnivoros;
+			
+		}
+		
+		return null;}
+
+	@Override
+	public void onRegister(double time, MapInfo map, List<AnimalInfo> animals) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReset(double time, MapInfo map, List<AnimalInfo> animals) {
+		_listaCarnivoros.clear();
+		_listaHerviboros.clear();
+	}
+
+	@Override
+	public void onAnimalAdded(double time, MapInfo map, List<AnimalInfo> animals, AnimalInfo a) {
+		// TODO Auto-generated method stub
+		
+		//solo hay carnivoros y herviboros de momento
+		if(a.get_diet()==Diet.CARNIVORE)
+			_listaCarnivoros.add(a);
+		else
+			_listaHerviboros.add(a);
+		
+	}
+
+	@Override
+	public void onRegionSet(int row, int col, MapInfo map, RegionInfo r) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onAvanced(double time, MapInfo map, List<AnimalInfo> animals, double dt) {
+
+		IteracionClass it=new IteracionClass(animals.stream().filter((a)->a.get_diet()==Diet.CARNIVORE && a.get_state()==Animal.State.HUNGER).count(),
+				animals.stream().filter((a)->a.get_diet()==Diet.HERBIVORE && a.get_state()==Animal.State.DANGER).count());
+		
+		System.out.println(it);
+		
+		_listaIteraciones.add(it);
+		
+		fireTableDataChanged();
+		
+	}
+
+}

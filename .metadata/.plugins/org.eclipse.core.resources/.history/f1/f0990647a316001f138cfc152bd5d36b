@@ -1,0 +1,65 @@
+package simulator.view;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import simulator.control.Controler;
+import simulator.model.AnimalInfo;
+import simulator.model.EcoSysObserver;
+import simulator.model.MapInfo;
+import simulator.model.MapInfo.RegionData;
+import simulator.model.RegionInfo;
+
+public class Car implements EcoSysObserver{
+	private Controler _ctrl;
+	private Map<RegionInfo,Integer> _mapaRegiones;
+	
+	public Car(Controler ctrl) {
+		
+		_mapaRegiones=new HashMap<>();
+		
+		
+		_ctrl=ctrl;
+		ctrl.addObserver(this);
+	}
+
+	@Override
+	public void onRegister(double time, MapInfo map, List<AnimalInfo> animals) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onReset(double time, MapInfo map, List<AnimalInfo> animals) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onAnimalAdded(double time, MapInfo map, List<AnimalInfo> animals, AnimalInfo a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRegionSet(int row, int col, MapInfo map, RegionInfo r) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onAvanced(double time, MapInfo map, List<AnimalInfo> animals, double dt) {
+		Iterator it=map.iterator();
+		MapInfo.RegionData rdt;
+		while(it.hasNext()) {
+			rdt=it.next();
+			map.itera
+		}
+		
+	}
+public void Imprimir() {
+	System.out.println("Car solucion");
+}
+}
