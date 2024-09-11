@@ -1,7 +1,0 @@
-INDEX VERSION 1.132+C:\Luis\cole\23-24\2 Cuatri\TP 2\Workspace\.metadata\.plugins\org.eclipse.jdt.core
-3129026398.index
-1836090017.index
-1865797976.index
-2052953213.index
-4177826878.index
-3422053143.index
